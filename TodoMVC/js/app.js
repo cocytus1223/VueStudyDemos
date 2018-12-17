@@ -1,23 +1,13 @@
 (function (window) {
 	'use strict';
 
+	// 页面加载的时候，获取到localStorage中的数据
+	let list = JSON.parse(localStorage.getItem('todoList')) || []
 	// Your starting point. Enjoy the ride!
 	const vm = new Vue({
 		el: '.todoapp',
 		data: {
-			list: [{
-				id: 1,
-				name: '吃饭',
-				completed: true
-			}, {
-				id: 2,
-				name: '睡觉',
-				completed: false
-			}, {
-				id: 3,
-				name: '敲代码',
-				completed: false
-			}],
+			list,
 			todoName: '',
 			clickId: -1
 		},
@@ -60,6 +50,16 @@
 			},
 			isShowFooter() {
 				return this.list.length > 0
+			}
+		},
+		watch: {
+			list: {
+				handler(value) {
+					console.log('发生了改变', value)
+					// localStorage只能存储字符串类型，复杂类型需要转成字符串
+					localStorage.setItem('todoList', JSON.stringify(value))
+				},
+				deep: true
 			}
 		}
 	})
