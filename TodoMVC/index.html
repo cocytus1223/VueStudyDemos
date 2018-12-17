@@ -57,10 +57,10 @@
 			<!-- 如果list中有任务，就显示footer，否则隐藏footer -->
 			<footer
 				class="footer"
-				v-show="list.length"
+				v-show="isShowFooter"
 			>
 				<!-- This should be `0 items left` by default -->
-				<span class="todo-count"><strong>{{list.filter(item => !item.completed).length}}</strong> item left</span>
+				<span class="todo-count"><strong>{{ leftCount }}</strong> item left</span>
 				<!-- Remove this if you don't implement routing -->
 				<ul class="filters">
 					<li>
@@ -77,7 +77,7 @@
 				<button
 					class="clear-completed"
 					@click="HandlerClearTodo"
-					v-show="list.some(item => item.completed)"
+					v-show="isShowClear"
 				>Clear completed</button>
 			</footer>
 		</section>

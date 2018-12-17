@@ -50,6 +50,17 @@
 			HandlerClearTodo() {
 				this.list = this.list.filter(item => !item.completed)
 			}
+		},
+		computed: {
+			leftCount() {
+				return this.list.filter(item => !item.completed).length
+			},
+			isShowClear() {
+				return this.list.some(item => item.completed)
+			},
+			isShowFooter() {
+				return this.list.length > 0
+			}
 		}
 	})
 })(window);
